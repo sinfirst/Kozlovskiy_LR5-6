@@ -41,11 +41,23 @@ Book* selectBook(const string& type) {
     return libraryBooks[index].get();
 }
 
+// Функция добавления книги с валидацией
+template<typename T>
+void addBookWithValidation(T* book) {
+    if (book->validate()) {
+        libraryBooks.emplace_back(book);
+        cout << "Book added successfully!\n";
+    } else {
+        cerr << "Invalid book data! Book not added.\n";
+        delete book;
+    }
+}
+
 // Функции для работы с Novel
 void createNewNovel() {
     Novel* novel = new Novel();
     cin >> *novel;
-    libraryBooks.emplace_back(novel);
+    addBookWithValidation(novel);
 }
 
 void createCopyNovel() {
@@ -55,7 +67,16 @@ void createCopyNovel() {
         return;
     }
     Novel* copy = new Novel(*source);
-    libraryBooks.emplace_back(copy);
+    addBookWithValidation(copy);
+}
+
+void createNovelByTitleISBN() {
+    string isbn, title;
+    EnterString(cin, isbn, "Enter ISBN for new Novel")();
+    EnterString(cin, title, "Enter title for new Novel")();
+    
+    Novel* novel = new Novel(isbn, title);;
+    libraryBooks.emplace_back(novel);;
 }
 
 void combineNovels() {
@@ -73,8 +94,7 @@ void combineNovels() {
     
     try {
         Novel combined = *first + *second;
-        libraryBooks.emplace_back(make_unique<Novel>(combined));
-        cout << "Novels combined successfully!\n";
+        addBookWithValidation(new Novel(combined));
     } catch (const invalid_argument& e) {
         cerr << "Error: " << e.what() << "\n";
     }

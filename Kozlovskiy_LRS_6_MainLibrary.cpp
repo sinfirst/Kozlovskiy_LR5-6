@@ -23,7 +23,8 @@ int main() {
         {8, {"Add new AudioBook", createNewAudioBook}},
         {9, {"Copy existing AudioBook", createCopyAudioBook}},
         {10, {"Play AudioBook sample", playAudioBookSample}},
-        {11, {"Demonstrate polymorphism", demonstratePolymorphism}}
+        {11, {"Demonstrate polymorphism", demonstratePolymorphism}},
+        {12, {"Create novel by title", createNovelByTitleISBN}}
     };
 
     int choice = 0;

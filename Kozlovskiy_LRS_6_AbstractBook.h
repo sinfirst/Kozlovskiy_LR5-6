@@ -9,7 +9,12 @@ protected:
     string title;
     int publicationYear;
     
-    virtual ostream& print(ostream& myostream) const = 0;
+    virtual ostream& print(ostream& myostream) const {
+        myostream << "Book [ISBN = " << ISBN << ", title = " << title 
+                  << ", year = " << publicationYear << "]\n";
+        return myostream;
+    }
+    
     virtual istream& input(istream& myistream);
 
 public:
@@ -23,8 +28,9 @@ public:
         cout << "Copy constructor Book\n";
     }
     
-    Book(const string& isbn) : ISBN(isbn), title(""), publicationYear(0) {
-        cout << "Transformation constructor Book\n";
+    // Конструктор преобразования по ISBN
+    explicit Book(const string& isbn) : ISBN(isbn), title(""), publicationYear(0) {
+        cout << "Transformation constructor Book (ISBN)\n";
     }
     
     virtual ~Book() {

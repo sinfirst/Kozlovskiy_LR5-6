@@ -8,7 +8,13 @@ protected:
     string author;
     int pageCount;
     
-    ostream& print(ostream& myostream) const override;
+    ostream& print(ostream& myostream) const override {
+        myostream << "Novel [ISBN = " << ISBN << ", title = " << title 
+                  << ", author = " << author << ", pages = " << pageCount 
+                  << ", year = " << publicationYear << "]\n";
+        return myostream;
+    }
+    
     istream& input(istream& myistream) override;
 
 public:
@@ -22,9 +28,10 @@ public:
         cout << "Copy constructor Novel\n";
     }
     
+    // Конструктор преобразования по title и ISBN
     Novel(const string& isbn, const string& t) : Book(isbn), author(""), pageCount(0) {
         title = t;
-        cout << "Transformation constructor Novel\n";
+        cout << "Transformation constructor Novel (ISBN, title)\n";
     }
     
     virtual ~Novel() {
@@ -68,13 +75,6 @@ public:
         return combined;
     }
 };
-
-ostream& Novel::print(ostream& myostream) const {
-    myostream << "Novel [ISBN = " << ISBN << ", title = " << title 
-              << ", author = " << author << ", pages = " << pageCount 
-              << ", year = " << publicationYear << "]\n";
-    return myostream;
-}
 
 istream& Novel::input(istream& myistream) {
     Book::input(myistream);
