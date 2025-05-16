@@ -76,3 +76,9 @@ istream& Book::input(istream& myistream) {
 }
 
 #endif // _KOZLOVSKIY_LRS_6_ABSTRACT_BOOK_H
+
+
+//Добавить описание print родителя
+//Конструктор преобразования для наследника по title, isbn
+//Род класс Конструктор преобразования по isbn
+//Использовать validate при добавлении в общий vector
