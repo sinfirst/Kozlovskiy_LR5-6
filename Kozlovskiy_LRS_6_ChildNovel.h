@@ -9,9 +9,9 @@ protected:
     int pageCount;
     
     ostream& print(ostream& myostream) const override {
-        myostream << "Novel [ISBN = " << ISBN << ", title = " << title 
-                  << ", author = " << author << ", pages = " << pageCount 
-                  << ", year = " << publicationYear << "]\n";
+        Book::print(myostream); // Вызов родительского print
+        myostream << "  Novel details [author = " << author 
+                  << ", pages = " << pageCount << "]\n";
         return myostream;
     }
     
@@ -21,22 +21,27 @@ public:
     // Конструкторы
     Novel() : author(""), pageCount(0) {
         cout << "Default constructor Novel\n";
+        print(cout);
     }
     
     Novel(const Novel &other) : Book(other), author(other.author), 
                               pageCount(other.pageCount) {
         cout << "Copy constructor Novel\n";
+        print(cout);
     }
     
     // Конструктор преобразования по title и ISBN
     Novel(const string& isbn, const string& t) : Book(isbn), author(""), pageCount(0) {
         title = t;
         cout << "Transformation constructor Novel (ISBN, title)\n";
+        print(cout);
     }
     
     virtual ~Novel() {
-        cout << "Novel destroyed: " << title << endl;
+        cout << "Novel destroyed: ";
+        print(cout);
     }
+
 
     // Геттеры и сеттеры
     string getAuthor() const { return author; }

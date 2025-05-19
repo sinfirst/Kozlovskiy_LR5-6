@@ -21,21 +21,26 @@ public:
     // Конструкторы и деструктор
     Book() : ISBN(""), title(""), publicationYear(0) {
         cout << "Default constructor Book\n";
+        print(cout); // Вывод информации при создании
     }
     
     Book(const Book &other) : ISBN(other.ISBN), title(other.title), 
                              publicationYear(other.publicationYear) {
         cout << "Copy constructor Book\n";
+        print(cout); // Вывод информации при копировании
     }
     
     // Конструктор преобразования по ISBN
     explicit Book(const string& isbn) : ISBN(isbn), title(""), publicationYear(0) {
         cout << "Transformation constructor Book (ISBN)\n";
+        print(cout); // Вывод информации при преобразовании
     }
     
     virtual ~Book() {
-        cout << "Book destroyed: " << title << endl;
+        cout << "Book destroyed: "; 
+        print(cout); // Вывод информации при уничтожении
     }
+
 
     // Геттеры и сеттеры
     string getISBN() const { return ISBN; }
